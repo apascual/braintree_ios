@@ -7,8 +7,8 @@ class MockAPIClient : BTAPIClient {
     var lastGETParameters = [:] as [String : String]?
     var postedAnalyticsEvents : [String] = []
 
-    var cannedConfigurationResponseBody : BTJSON? = nil
-    var cannedConfigurationResponseError : NSError? = nil
+    @objc var cannedConfigurationResponseBody : BTJSON? = nil
+    @objc var cannedConfigurationResponseError : NSError? = nil
 
     var cannedResponseError : NSError? = nil
     var cannedHTTPURLResponse : HTTPURLResponse? = nil
@@ -18,25 +18,33 @@ class MockAPIClient : BTAPIClient {
     var fetchPaymentMethodsSorting = false
     
     override func get(_ path: String, parameters: [String : String]?, completion completionBlock: ((BTJSON?, HTTPURLResponse?, Error?) -> Void)? = nil) {
-        lastGETPath = path
-        lastGETParameters = parameters
-
-        guard let completionBlock = completionBlock else {
-            return
-        }
-        completionBlock(cannedResponseBody, cannedHTTPURLResponse, cannedResponseError)
+        self.get(path, parameters: parameters, httpType:.gateway, completion: completionBlock)
     }
 
     override func post(_ path: String, parameters: [AnyHashable : Any]?, completion completionBlock: ((BTJSON?, HTTPURLResponse?, Error?) -> Void)? = nil) {
-        lastPOSTPath = path
-        lastPOSTParameters = parameters
+        self.post(path, parameters: parameters, httpType:.gateway, completion: completionBlock)
+    }
 
+    override func get(_ path: String, parameters: [String : String]?, httpType: BTAPIClientHTTPType, completion completionBlock: ((BTJSON?, HTTPURLResponse?, Error?) -> Void)? = nil) {
+        lastGETPath = path
+        lastGETParameters = parameters
+        
         guard let completionBlock = completionBlock else {
             return
         }
         completionBlock(cannedResponseBody, cannedHTTPURLResponse, cannedResponseError)
     }
-
+    
+    override func post(_ path: String, parameters: [AnyHashable : Any]?, httpType: BTAPIClientHTTPType, completion completionBlock: ((BTJSON?, HTTPURLResponse?, Error?) -> Void)? = nil) {
+        lastPOSTPath = path
+        lastPOSTParameters = parameters
+        
+        guard let completionBlock = completionBlock else {
+            return
+        }
+        completionBlock(cannedResponseBody, cannedHTTPURLResponse, cannedResponseError)
+    }
+    
     override func fetchOrReturnRemoteConfiguration(_ completionBlock: @escaping (BTConfiguration?, Error?) -> Void) {
         guard let responseBody = cannedConfigurationResponseBody else {
             completionBlock(nil, cannedConfigurationResponseError)

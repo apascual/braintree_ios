@@ -1,5 +1,69 @@
 # Braintree iOS SDK Release Notes
 
+## 4.13.0 (2018-03-20)
+
+* Update `PayPalDataCollector` to include latest `libPPRiskComponent.a`
+
+## 4.12.0 (2018-03-06)
+
+* Add support for Venmo profiles
+* Fix demo app issue with CocoaPods
+
+## 4.11.0 (2018-02-05)
+
+* Fix code for implicit retain self warning (thanks @keith)
+
+## 4.10.1 (2018-02-01)
+
+* Add BTThreeDSecureInfo to BTCardNonce
+* Use angled brackets for BraintreePayPal header imports (thanks @nudge)
+
+## 4.10.0 (2017-12-08)
+
+* Add iDEAL support
+* Add new 3D Secure integration with browser support
+* Fix issue where ApplePay nonces were not having their default property set (Thanks @rksaraf)
+
+## 4.9.6 (2017-11-13)
+
+* Fix issue where Venmo attempted to vault when using a Tokenization Key
+
+## 4.9.5 (2017-11-03)
+
+* Fix a timeout issue on configuration fetch
+* Static analysis fixes
+* Add BraintreeAmericanExpress module and getRewardsBalance method
+
+## 4.9.4 (2017-10-02)
+
+* Fix Xcode9 compatibility issues with iOS 7.0
+
+## 4.9.3 (2017-09-28)
+
+* Update Xcode 9 code for availability checking
+* Fix analytics thread issue
+
+## 4.9.2 (2017-09-25)
+
+* Fix Xcode9 build warnings
+* Add additional billing address params to card builder
+  * Country Code Alpha 3
+  * Country Code Numeric
+  * Company
+  * Extended Address
+
+## 4.9.1 (2017-09-20)
+
+* Update libPPRiskComponent to latest version
+
+## 4.9.0 (2017-09-13)
+
+* Add support for `SFAuthenticationSession` for PayPal payments
+
+## 4.8.7 (2017-08-30)
+
+* Add firstName and lastName to BTCard
+
 ## 4.8.6 (2017-08-17)
 
 * Add additional bin data to card based payment methods
